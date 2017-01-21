@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 5748af55776cd7149a347f00d31310e0
+timeCreated: 1485031348
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Clutchee
+  fontNames:
+  - Clutchee
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
