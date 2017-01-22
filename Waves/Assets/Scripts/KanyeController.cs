@@ -11,11 +11,28 @@ public class KanyeController : MonoBehaviour
     public bool isInWave = false;
     public float waveTime = 0.0f;
 
+    public bool hasWon = false;
+
     public Rigidbody body;
 
     public AudioSource audio2;
 
     public AudioClip birdCage;
+    public AudioClip shade;
+    public AudioClip giantWave;
+    public AudioClip fist;
+    public AudioClip wavesDontDie;
+
+
+    public GameObject KanyeMad;
+    public GameObject KanyeHappy;
+
+    void Start()
+    {
+        KanyeHappy.SetActive(true);
+        KanyeMad.SetActive(false);
+
+    }
 
     #region internal types
 
@@ -196,7 +213,7 @@ public class KanyeController : MonoBehaviour
 
         waveTime += Time.deltaTime;
 
-        if (waveTime > .1f)
+        if (waveTime > .2f)
             isInWave = false;
 
         RaycastHit floor;
@@ -244,6 +261,26 @@ public class KanyeController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if(other.name == "Wave")
+        {
+
+            KanyeMad.SetActive(true);
+            KanyeHappy.SetActive(false);
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.name == "Wave")
+        {
+            KanyeMad.SetActive(false);
+            KanyeHappy.SetActive(true);
+
+        }
+    }
+
+    void OnTriggerStay(Collider other)
+    {
         HandleCollision(other);
         Debug.Log(string.Format("Kanye TRIGGER ENTER {0}", other.name));
 
@@ -282,11 +319,42 @@ public class KanyeController : MonoBehaviour
             waveTime = 0.0f;
         }
 
-        if(collision.name == "BirdCage")
+        if(collision.name.StartsWith("BirdCage"))
         {
             if (!audio2.isPlaying)
                 audio2.PlayOneShot(birdCage);
         }
+
+        if (collision.name.StartsWith("Shade"))
+        {
+            if (!audio2.isPlaying)
+                audio2.PlayOneShot(shade);
+        }
+
+        if (collision.name.StartsWith("GiantWave"))
+        {
+            if (!audio2.isPlaying)
+                audio2.PlayOneShot(giantWave);
+        }
+
+
+        if (collision.name.StartsWith("Fist"))
+        {
+            if (!audio2.isPlaying)
+                audio2.PlayOneShot(fist);
+        }
+
+        if (hasWon == false)
+        {
+            if (collision.name.StartsWith("Pier"))
+            {
+                if (!audio2.isPlaying)
+                    audio2.PlayOneShot(wavesDontDie);
+
+                hasWon = true;
+            }
+        }
+
     }
     #endregion
 

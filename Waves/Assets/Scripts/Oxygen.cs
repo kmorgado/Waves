@@ -19,7 +19,9 @@ public class Oxygen : MonoBehaviour
     public AudioSource audio1;
 
     float MaxOxygen = 100;
-    float OxygenLevel = 100;
+    public float OxygenLevel = 100;
+
+    public bool isDead = false;
 
 
     bool playAlmostDead = true;
@@ -47,27 +49,31 @@ public class Oxygen : MonoBehaviour
 
     public void DecreaseOxygen()
     {
-        OxygenLevel -= .2f;
-
-        if (OxygenLevel <= 30)
+        if (isDead == false)
         {
-            if (playAlmostDead)
-            { 
-                audio1.PlayOneShot(almostDead);
-                playAlmostDead = false;
+            OxygenLevel -= .2f;
+
+            if (OxygenLevel <= 30)
+            {
+                if (playAlmostDead)
+                {
+                    audio1.PlayOneShot(almostDead);
+                    playAlmostDead = false;
+                }
             }
-        }
 
-        if (OxygenLevel <= 0)
-        {
+            if (OxygenLevel <= 0)
+            {
 
-            OxygenLevel = 0;
+                OxygenLevel = 0;
 
-            Debug.Log("DEAD");
-            //Game over
-            if(!audio1.isPlaying)
-                audio1.PlayOneShot(dead);
+                Debug.Log("DEAD");
+                //Game over
+                if (!audio1.isPlaying)
+                    audio1.PlayOneShot(dead);
 
+                isDead = true;
+            }
         }
     }
 
