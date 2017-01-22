@@ -4,9 +4,18 @@ using System;
 using System.Collections.Generic;
 
 
-[RequireComponent(typeof(BoxCollider), typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody))]
 public class KanyeController : MonoBehaviour
 {
+
+    public bool isInWave = false;
+    public float waveTime = 0.0f;
+
+    public Rigidbody body;
+
+    public AudioSource audio2;
+
+    public AudioClip birdCage;
 
     #region internal types
 
@@ -181,6 +190,33 @@ public class KanyeController : MonoBehaviour
     bool _isGoingUpSlope = false;
 
 
+    public void FixedUpdate()
+    {
+        //GameObject Wave = GameObject.Find("Wave");
+
+        waveTime += Time.deltaTime;
+
+        if (waveTime > .1f)
+            isInWave = false;
+
+        RaycastHit floor;
+
+
+       // Debug.DrawLine( (Vector3.up *5) + transform.position, transform.position, Color.black);
+
+
+        if (Physics.Raycast(transform.position, Vector3.down, out floor))
+        {
+            float offsetDistance = floor.distance;
+
+            //Debug.Log(offsetDistance);
+            Debug.DrawLine(transform.position, floor.point, Color.black);
+        }
+
+
+       
+    }
+
     #region Monobehaviour
 
     void Awake()
@@ -205,9 +241,24 @@ public class KanyeController : MonoBehaviour
         }
     }
 
+
+    void OnTriggerEnter(Collider other)
+    {
+        HandleCollision(other);
+        Debug.Log(string.Format("Kanye TRIGGER ENTER {0}", other.name));
+
+    }
+
+
     void OnCollisionEnter(Collision collision)
     {
-        HandleCollision(collision);
+
+        //Debug.Log(string.Format("Kanye collision entered {0}", collision.collider.name));
+
+    }
+
+    void OnCollisionStay(Collision collision)
+    {
     }
 
     void OnCollisionExit(Collision collision)
@@ -215,16 +266,27 @@ public class KanyeController : MonoBehaviour
         Debug.Log(string.Format("Kanye collision exited {0}", collision.collider.name));
     }
 
-    void OnCollisionStay(Collision collision)
-    {
-        HandleCollision(collision);
-    }
 
-    void HandleCollision(Collision collision)
+
+    void HandleCollision(Collider collision)
     {
         //Get all the vertices from the terrain near Kanye
         //float depth = collision.transform.position.y - transform.position.y;
         //Debug.Log(string.Format("Depth: {0}", depth));
+
+        if (collision.name == "Wave")
+        {
+            Debug.Log(string.Format("Kanye collision entered {0}", collision.name));
+
+            isInWave = true;
+            waveTime = 0.0f;
+        }
+
+        if(collision.name == "BirdCage")
+        {
+            if (!audio2.isPlaying)
+                audio2.PlayOneShot(birdCage);
+        }
     }
     #endregion
 

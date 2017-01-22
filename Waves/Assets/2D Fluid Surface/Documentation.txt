@@ -1,0 +1,15 @@
+Thanks for purchasing 2D Fluid Surface.
+
+Visit scene called Demo and hit play. Now you see 4 waves. They are all controlled by the same script with different properties.
+
+For using asset in your project do the following:
+1) Drag one of the prefabs in your scene.
+2) Adjust the WaveMesh.cs properties to your liking.
+3) Assign a material to Mesh Renderer.
+
+If you want to add a collider to the wave do the following:
+1) Add a WaveCollider.cs to the wave gameobject.
+Note: Recreating a collider each frame is causing high cpu usage. Try to lower the pointConcetration for better performance.
+
+If you have any question contact me at support@nexgea.com
+  

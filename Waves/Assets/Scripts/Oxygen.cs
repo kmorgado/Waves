@@ -42,8 +42,6 @@ public class Oxygen : MonoBehaviour
         if(OxygenLevel > 80)
         {
             playAlmostDead = true;
-            audio1.PlayOneShot(dead);
-
         }
     }
 
@@ -55,7 +53,7 @@ public class Oxygen : MonoBehaviour
         {
             if (playAlmostDead)
             { 
-            audio1.PlayOneShot(almostDead);
+                audio1.PlayOneShot(almostDead);
                 playAlmostDead = false;
             }
         }
@@ -75,7 +73,6 @@ public class Oxygen : MonoBehaviour
 
     void Update()
     {
-
         OxygenBar.transform.localScale = new Vector3(OxygenBar.transform.localScale.x, OxygenLevel / 100.0f, OxygenBar.transform.localScale.z);
     }
 

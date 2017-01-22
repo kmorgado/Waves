@@ -18,12 +18,12 @@ public class GenerateTerrain : MonoBehaviour {
 	void Update(){
 		
 		Init();
-        CalculateKanyeHeight();
 	}
 
     public float KanyeWaterHeight = 0;
 	public float wavesSpeed = 2;
 	private int counter = 0, zLevel = 0;
+
 	void Init(){
 		
 		mesh = this.GetComponent<MeshFilter>().mesh;
@@ -43,24 +43,21 @@ public class GenerateTerrain : MonoBehaviour {
 		mesh.RecalculateBounds();
 		mesh.RecalculateNormals();
 
-		Destroy(gameObject.GetComponent<MeshCollider>());
-		MeshCollider collider = gameObject.AddComponent<MeshCollider>();
-		collider.sharedMesh = null;
-		collider.sharedMesh = mesh;
-	}
 
-    private void CalculateKanyeHeight()
-    {
-        GameObject Kanye = GameObject.Find("Kanye");
-        Transform whereHeAtDoe = Kanye.transform;
-        
-        // Get all the vertices near Kanye's Z
-        //Vector3[] nearbyVertices = mesh.vertices.Where(vertex => Mathf.Abs(vertex.x - whereHeAtDoe.position.x) <= 0.5f).ToArray();
-        //float[] nearbyZs = nearbyVertices.Select(zval => zval.z).ToArray();
-        //KanyeWaterHeight = Mathf.Min(nearbyZs);
-        //Debug.Log(string.Format("KanyeWaterHeight: {0}", KanyeWaterHeight));
+        Destroy(gameObject.GetComponent<MeshCollider>());
+
+		MeshCollider collider = gameObject.AddComponent<MeshCollider>();
+
+
+        collider.sharedMesh = null;
+		collider.sharedMesh = mesh;
+
+      // collider.convex = true;
+       // collider.isTrigger = true;
         
     }
+
+
 
 	public bool waves = true;
 	void CalculateWaves(int i,int minusZ){

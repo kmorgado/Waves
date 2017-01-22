@@ -18,14 +18,25 @@ public class MainGame : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        oxygen.DecreaseOxygen();
-        if (Input.GetKeyDown(KeyCode.D))
+        if (kanye.isInWave)
         {
-            kanye.rigidBody2D.mass = 2.5f;
+           // Debug.Log("IN WAVE");
+
+            if (Input.GetKey(KeyCode.Space))
+            {
+                Debug.Log("JUMP");
+
+                kanye.body.AddForce(Vector3.up * 100);
+
+                //kanye.transform.localPosition = new Vector3(kanye.transform.localPosition.x, kanye.transform.localPosition.y + .5f, kanye.transform.localPosition.z);
+            }
+
+            oxygen.DecreaseOxygen();
         }
         else
         {
-            kanye.rigidBody2D.mass = 1;
+            oxygen.IncreaseOxygen();
         }
+
 	}
 }
