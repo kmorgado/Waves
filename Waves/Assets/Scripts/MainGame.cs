@@ -7,6 +7,8 @@ public class MainGame : MonoBehaviour {
     KanyeController kanye;
     GenerateTerrain waveTerrain;
 
+    public Oxygen oxygen;
+
 	// Use this for initialization
 	void Start () {
         kanye = GameObject.Find("Kanye").GetComponent<KanyeController>();
@@ -15,9 +17,9 @@ public class MainGame : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
 
-        if(Input.GetKeyDown(KeyCode.D))
+        oxygen.DecreaseOxygen();
+        if (Input.GetKeyDown(KeyCode.D))
         {
             kanye.rigidBody2D.mass = 2.5f;
         }

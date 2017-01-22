@@ -7,9 +7,17 @@ using System.Collections.Generic;
     [RequireComponent(typeof(BoxCollider), typeof(Rigidbody))]
     public class KanyeController : MonoBehaviour
     {
-        #region internal types
+    #region Audio
 
-        struct CharacterRaycastOrigins
+    public AudioSource almostDead;
+    public AudioSource dead;
+
+
+    #endregion
+
+    #region internal types
+
+    struct CharacterRaycastOrigins
         {
             public Vector3 topLeft;
             public Vector3 bottomRight;
