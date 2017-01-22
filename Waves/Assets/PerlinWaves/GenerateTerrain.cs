@@ -13,12 +13,14 @@ public class GenerateTerrain : MonoBehaviour {
 	void Start(){
 		Init();
 	}
+
 	void Update(){
 		
-			Init();
-
+		Init();
+        CalculateKanyeHeight();
 	}
 
+    public float KanyeWaterHeight = 0;
 	public float wavesSpeed = 2;
 	private int counter = 0, zLevel = 0;
 	void Init(){
@@ -36,8 +38,6 @@ public class GenerateTerrain : MonoBehaviour {
 			zLevel += 1;
 		}
 
-	
-
 		mesh.vertices = vertices;
 		mesh.RecalculateBounds();
 		mesh.RecalculateNormals();
@@ -47,6 +47,14 @@ public class GenerateTerrain : MonoBehaviour {
 		collider.sharedMesh = null;
 		collider.sharedMesh = mesh;
 	}
+
+    private void CalculateKanyeHeight()
+    {
+        GameObject Kanye = GameObject.Find("Kanye");
+        Transform whereHeAtDoe = Kanye.transform;
+
+        // Find out where is in relation
+    }
 
 	public bool waves = true;
 	void CalculateWaves(int i,int minusZ){
