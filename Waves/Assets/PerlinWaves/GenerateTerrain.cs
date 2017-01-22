@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Linq;
 using System.Collections;
 
 public class GenerateTerrain : MonoBehaviour {
@@ -52,8 +53,13 @@ public class GenerateTerrain : MonoBehaviour {
     {
         GameObject Kanye = GameObject.Find("Kanye");
         Transform whereHeAtDoe = Kanye.transform;
-
-        // Find out where is in relation
+        
+        // Get all the vertices near Kanye's Z
+        //Vector3[] nearbyVertices = mesh.vertices.Where(vertex => Mathf.Abs(vertex.x - whereHeAtDoe.position.x) <= 0.5f).ToArray();
+        //float[] nearbyZs = nearbyVertices.Select(zval => zval.z).ToArray();
+        //KanyeWaterHeight = Mathf.Min(nearbyZs);
+        //Debug.Log(string.Format("KanyeWaterHeight: {0}", KanyeWaterHeight));
+        
     }
 
 	public bool waves = true;

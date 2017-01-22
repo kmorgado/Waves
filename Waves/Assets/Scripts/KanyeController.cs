@@ -204,27 +204,27 @@ using System.Collections.Generic;
             }
         }
 
-
-        public void OnTriggerEnter2D(Collider col)
+        void OnCollisionEnter(Collision collision)
         {
-            if (onTriggerEnterEvent != null)
-                onTriggerEnterEvent(col);
+            HandleCollision(collision);
         }
 
-
-        public void OnTriggerStay2D(Collider col)
+        void OnCollisionExit(Collision collision)
         {
-            if (onTriggerStayEvent != null)
-                onTriggerStayEvent(col);
+            Debug.Log(string.Format("Kanye collision exited {0}", collision.collider.name));
         }
 
-
-        public void OnTriggerExit2D(Collider col)
+        void OnCollisionStay(Collision collision)
         {
-            if (onTriggerExitEvent != null)
-                onTriggerExitEvent(col);
+            HandleCollision(collision);
         }
 
+        void HandleCollision(Collision collision)
+        {
+            //Get all the vertices from the terrain near Kanye
+            //float depth = collision.transform.position.y - transform.position.y;
+            //Debug.Log(string.Format("Depth: {0}", depth));
+        }
         #endregion
 
 
