@@ -12,7 +12,6 @@ using System.Collections.Generic;
     public AudioSource almostDead;
     public AudioSource dead;
 
-
     #endregion
 
     #region internal types
@@ -90,6 +89,12 @@ using System.Collections.Generic;
             }
         }
 
+    /// <summary>
+    /// Is he in the water
+    /// </summary>
+    public bool isWet;
+
+    private System.Timers.Timer wetTimer;
 
         /// <summary>
         /// mask with all layers that the player should interact with
@@ -121,6 +126,8 @@ using System.Collections.Generic;
         /// <value>The jumping threshold.</value>
         public float jumpingThreshold = 0.07f;
 
+    // Number of seconds required for Kanye to dry the fuck off
+    public float dryTime = 0.5f;
 
         /// <summary>
         /// curve for multiplying speed based on slope (negative = down slope and positive = up slope)
@@ -229,14 +236,38 @@ using System.Collections.Generic;
 
         void HandleCollision(Collision collision)
         {
+        if (!collision.collider.name.Equals("Wave"))
+            return;
+
+            if (isWet != true)
+            {
+                // This is the real transition, do something here?
+                wetTimer = new System.Timers.Timer(dryTime * 1000);
+                wetTimer.Elapsed += WetTimer_Elapsed;
+            wetTimer.Start();
+            }
+            else
+            {
+            // I thought these had resets :(
+            wetTimer.Stop();
+            wetTimer.Start();
+            }
+            isWet = true;
+            
+
             //Get all the vertices from the terrain near Kanye
             //float depth = collision.transform.position.y - transform.position.y;
             //Debug.Log(string.Format("Depth: {0}", depth));
         }
-        #endregion
+
+    private void WetTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+    {
+        isWet = false;
+    }
+    #endregion
 
 
-        [System.Diagnostics.Conditional("DEBUG_CC2D_RAYS")]
+    [System.Diagnostics.Conditional("DEBUG_CC2D_RAYS")]
         void DrawRay(Vector3 start, Vector3 dir, Color color)
         {
             Debug.DrawRay(start, dir, color);
