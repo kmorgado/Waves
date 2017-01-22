@@ -3,9 +3,9 @@ using System.Collections;
 
 public class GenerateTerrain : MonoBehaviour {
 
-	[Range(0.1f,20.0f)]
+	[Range(0.1f,200.0f)]
 	public float heightScale = 5;
-	[Range(0.1f,40.0f)]
+	[Range(0.1f,400.0f)]
 	public float detailScale = 5.0f;
 	private Mesh mesh;
 	private Vector3[] vertices;

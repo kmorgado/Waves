@@ -41,7 +41,7 @@ public class SmoothFollow : MonoBehaviour
         else
         {
             newPos.x = target.position.x;
-            newPos.y = target.position.y;
+            newPos.y = target.position.y + 1;
             newPos.z = target.position.z;
         }
 
